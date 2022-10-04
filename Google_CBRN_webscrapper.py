@@ -94,11 +94,19 @@ def combine_page(lst: list) -> dict:
 
 def output_to_csv(f: dict) -> None:
     with open(f'{name}.csv', 'w', newline='') as csvfile:
-        fieldnames = ['tile', 'links']
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-        writer.writeheader()
-        for key in f:
-            writer.writerow({'tile': key, 'links': f[key]})
+        csv_writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        csv_writer.writerow(['title', 'link'])
+        for i, j in f.items():
+            title, link = i, j
+            print(title, link)
+            # csv_writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            csv_writer.writerow([title, link])
+
+        # fieldnames = ['tile', 'links']
+        # writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        # writer.writeheader()
+        # for key in f:
+        #     writer.writerow({'tile': key, 'links': f[key]})
 
 
 if __name__ == '__main__':
